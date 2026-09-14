@@ -1,0 +1,33 @@
+{
+  "name": "qualitylogin",
+  "version": "0.0.1",
+  "description": "Quality Engineer Login Application",
+  "keywords": [
+    "ui5",
+    "openui5",
+    "sapui5"
+  ],
+  "license": "ISC",
+  "author": "",
+  "type": "commonjs",
+  "main": "webapp/index.html",
+  "scripts": {
+    "start": "node node_modules/@ui5/cli/bin/ui5.cjs serve --config=ui5.yaml --open /index.html?sap-ui-xx-viewCache=false",
+    "start:ui5": "node node_modules/@ui5/cli/bin/ui5.cjs serve --config=ui5.yaml --open /index.html?sap-ui-xx-viewCache=false",
+    "start-local": "node node_modules/@ui5/cli/bin/ui5.cjs serve --config=ui5-local.yaml --open /index.html?sap-ui-xx-viewCache=false",
+    "build": "node node_modules/@ui5/cli/bin/ui5.cjs build --config=ui5.yaml --clean-dest --dest dist",
+    "lint": "eslint ./",
+    "deploy": "node node_modules/@sap/ux-ui5-tooling/bin/fiori.cjs verify",
+    "deploy-config": "node node_modules/@sap/ux-ui5-tooling/bin/fiori.cjs add deploy-config",
+    "start-noflp": "node node_modules/@ui5/cli/bin/ui5.cjs serve --config=ui5.yaml --open /index.html?sap-ui-xx-viewCache=false",
+    "start-variants-management": "node node_modules/@ui5/cli/bin/ui5.cjs serve --config=ui5.yaml --open /preview.html#app-preview"
+  },
+  "devDependencies": {
+    "@ui5/cli": "^4.0.33",
+    "@sap/ux-ui5-tooling": "1",
+    "@sap-ux/eslint-plugin-fiori-tools": "^10.0.0",
+    "eslint": "^10",
+    "@sap-ux/ui5-middleware-fe-mockserver": "2"
+  },
+  "sapuxLayer": "CUSTOMER_BASE"
+}

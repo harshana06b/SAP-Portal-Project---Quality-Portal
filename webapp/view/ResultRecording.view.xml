@@ -1,0 +1,102 @@
+<mvc:View
+  controllerName="com.quality.portal.qualitylogin.controller.ResultRecording"
+  displayBlock="true"
+  xmlns:mvc="sap.ui.core.mvc"
+  xmlns="sap.m"
+  xmlns:core="sap.ui.core">
+  <Page title="Result Records" showNavButton="true" navButtonPress=".onBack" class="qpFadeIn qpTablePage">
+    <content>
+      <VBox class="qpPageContent">
+        <OverflowToolbar class="qpFilterToolbar">
+          <SearchField id="resultSearch" width="14rem" height="2.5rem" liveChange=".onSearch" search=".onSearch" placeholder="Search" class="qpFilterControl"/>
+          <ComboBox id="resultPlantFilter" width="14rem" height="2.5rem" change=".onFilterChange" placeholder="Plant" class="qpFilterControl" items="{plantOptions>/plants}">
+            <core:Item key="{plantOptions>key}" text="{plantOptions>text}"/>
+          </ComboBox>
+          <Input id="resultMaterialFilter" width="14rem" height="2.5rem" liveChange=".onFilterChange" placeholder="Material" class="qpFilterControl"/>
+          <Select id="resultStatusFilter" width="14rem" height="2.5rem" change=".onFilterChange" class="qpFilterControl">
+            <items>
+              <core:Item key="" text="Result Status"/>
+              <core:Item key="1" text="Must be Processed"/>
+              <core:Item key="2" text="Processed"/>
+              <core:Item key="3" text="Requires Correction"/>
+              <core:Item key="5" text="Processing Complete"/>
+            </items>
+          </Select>
+          <DateRangeSelection id="resultDateRange" width="14rem" height="2.5rem" displayFormat="dd-MM-yyyy" valueFormat="yyyy-MM-dd" change=".onFilterChange" placeholder="Date Range" class="qpFilterControl"/>
+          <ToolbarSpacer/>
+          <Button icon="sap-icon://clear-filter" text="Clear" type="Transparent" press=".onClearFilters" class="qpFilterButton"/>
+          <Button icon="sap-icon://refresh" text="Refresh" type="Transparent" press=".onRefresh" class="qpFilterButton"/>
+        </OverflowToolbar>
+        <ScrollContainer horizontal="true" vertical="true" height="calc(100vh - 12rem)" class="qpTableScroll">
+          <Table
+            id="resultTable"
+            width="100%"
+            fixedLayout="false"
+            sticky="ColumnHeaders"
+            busyIndicatorDelay="0"
+            noDataText="No Records Found"
+            alternateRowColors="true"
+            class="qpEnterpriseTable qpResultTable"
+            items="{result>/ZCDS_QM_RESULTNEW64}">
+            <columns>
+              <Column hAlign="Center" width="9rem"><Button text="Inspection Lot" type="Transparent" press=".onSortColumn" class="qpColumnHeaderButton"><customData><core:CustomData key="sortPath" value="InspectionLot"/></customData></Button></Column>
+              <Column hAlign="Center" width="10rem"><Button text="Characteristic No" type="Transparent" press=".onSortColumn" class="qpColumnHeaderButton"><customData><core:CustomData key="sortPath" value="CharacteristicNo"/></customData></Button></Column>
+              <Column hAlign="Center" width="9rem"><Button text="Material" type="Transparent" press=".onSortColumn" class="qpColumnHeaderButton"><customData><core:CustomData key="sortPath" value="Material"/></customData></Button></Column>
+              <Column hAlign="Center" width="7rem"><Button text="Plant" type="Transparent" press=".onSortColumn" class="qpColumnHeaderButton"><customData><core:CustomData key="sortPath" value="Plant"/></customData></Button></Column>
+              <Column hAlign="Center" width="8rem"><Button text="Start Date" type="Transparent" press=".onSortColumn" class="qpColumnHeaderButton"><customData><core:CustomData key="sortPath" value="StartDate"/></customData></Button></Column>
+              <Column hAlign="Center" width="8rem"><Button text="End Date" type="Transparent" press=".onSortColumn" class="qpColumnHeaderButton"><customData><core:CustomData key="sortPath" value="EndDate"/></customData></Button></Column>
+              <Column hAlign="Center" width="8rem"><Button text="Inspection Type" type="Transparent" press=".onSortColumn" class="qpColumnHeaderButton"><customData><core:CustomData key="sortPath" value="InspectionType"/></customData></Button></Column>
+              <Column hAlign="Center" width="8rem"><Button text="Inspected Qty" type="Transparent" press=".onSortColumn" class="qpColumnHeaderButton"><customData><core:CustomData key="sortPath" value="InspectedQty"/></customData></Button></Column>
+              <Column hAlign="Center" width="10rem"><Button text="Result Status" type="Transparent" press=".onSortColumn" class="qpColumnHeaderButton"><customData><core:CustomData key="sortPath" value="ResultStatusCode"/></customData></Button></Column>
+              <Column hAlign="Center" width="8rem"><Button text="Inspector" type="Transparent" press=".onSortColumn" class="qpColumnHeaderButton"><customData><core:CustomData key="sortPath" value="Inspector"/></customData></Button></Column>
+              <Column hAlign="Center" width="8rem"><Button text="Created On" type="Transparent" press=".onSortColumn" class="qpColumnHeaderButton"><customData><core:CustomData key="sortPath" value="CreatedOn"/></customData></Button></Column>
+              <Column hAlign="Center" width="9rem"><Button text="Completed On" type="Transparent" press=".onSortColumn" class="qpColumnHeaderButton"><customData><core:CustomData key="sortPath" value="InspectionCompletedOn"/></customData></Button></Column>
+              <Column hAlign="Center" width="8rem"><Button text="Result Value" type="Transparent" press=".onSortColumn" class="qpColumnHeaderButton"><customData><core:CustomData key="sortPath" value="ResultValue"/></customData></Button></Column>
+              <Column hAlign="Center" width="9rem"><Button text="Defects Found" type="Transparent" press=".onSortColumn" class="qpColumnHeaderButton"><customData><core:CustomData key="sortPath" value="DefectsFound"/></customData></Button></Column>
+              <Column hAlign="Center" width="8rem"><Button text="Valuation" type="Transparent" press=".onSortColumn" class="qpColumnHeaderButton"><customData><core:CustomData key="sortPath" value="ValuationCode"/></customData></Button></Column>
+              <Column hAlign="Center" width="10rem"><Button text="Moved Quantity" type="Transparent" press=".onSortColumn" class="qpColumnHeaderButton"><customData><core:CustomData key="sortPath" value="MovedQuantity"/></customData></Button></Column>
+              <Column hAlign="Center" width="7rem"><Button text="Unit" type="Transparent" press=".onSortColumn" class="qpColumnHeaderButton"><customData><core:CustomData key="sortPath" value="Unit"/></customData></Button></Column>
+              <Column hAlign="Center" width="9rem"><Button text="Movement Type" type="Transparent" press=".onSortColumn" class="qpColumnHeaderButton"><customData><core:CustomData key="sortPath" value="MovementType"/></customData></Button></Column>
+              <Column hAlign="Center" width="9rem"><Button text="Debit/Credit" type="Transparent" press=".onSortColumn" class="qpColumnHeaderButton"><customData><core:CustomData key="sortPath" value="DebitCreditIndicator"/></customData></Button></Column>
+              <Column hAlign="Center" width="10rem"><Button text="Storage Location" type="Transparent" press=".onSortColumn" class="qpColumnHeaderButton"><customData><core:CustomData key="sortPath" value="StorageLocation"/></customData></Button></Column>
+              <Column hAlign="Center" width="8rem"><Button text="Posting Date" type="Transparent" press=".onSortColumn" class="qpColumnHeaderButton"><customData><core:CustomData key="sortPath" value="PostingDate"/></customData></Button></Column>
+            </columns>
+            <items>
+              <ColumnListItem vAlign="Middle">
+                <cells>
+                  <Text text="{result>InspectionLot}" wrapping="true" textAlign="Center" width="100%" emptyIndicatorMode="On"/>
+                  <Text text="{result>CharacteristicNo}" wrapping="true" textAlign="Center" width="100%" emptyIndicatorMode="On"/>
+                  <Text text="{result>Material}" wrapping="true" textAlign="Center" width="100%" emptyIndicatorMode="On"/>
+                  <Text text="{result>Plant}" wrapping="true" textAlign="Center" width="100%" emptyIndicatorMode="On"/>
+                  <Text text="{path:'result>StartDate', formatter:'.formatter.dateText'}" wrapping="true" textAlign="Center" width="100%" emptyIndicatorMode="On"/>
+                  <Text text="{path:'result>EndDate', formatter:'.formatter.dateText'}" wrapping="true" textAlign="Center" width="100%" emptyIndicatorMode="On"/>
+                  <Text text="{result>InspectionType}" wrapping="true" textAlign="Center" width="100%" emptyIndicatorMode="On"/>
+                  <Text text="{path:'result>InspectedQty', formatter:'.formatter.quantityText'}" wrapping="true" textAlign="Center" width="100%" emptyIndicatorMode="On"/>
+                  <VBox width="100%" alignItems="Center" justifyContent="Center">
+                    <ObjectStatus text="{path:'result>ResultStatusCode', formatter:'.formatter.resultStatusText'}" state="{path:'result>ResultStatusCode', formatter:'.formatter.resultStatusState'}" visible="{= !!${result>ResultStatusCode} }" class="qpCenteredStatus"/>
+                    <Text text="-" visible="{= !${result>ResultStatusCode} }" wrapping="true" textAlign="Center" width="100%"/>
+                  </VBox>
+                  <Text text="{result>Inspector}" wrapping="true" textAlign="Center" width="100%" emptyIndicatorMode="On"/>
+                  <Text text="{path:'result>CreatedOn', formatter:'.formatter.dateText'}" wrapping="true" textAlign="Center" width="100%" emptyIndicatorMode="On"/>
+                  <Text text="{path:'result>InspectionCompletedOn', formatter:'.formatter.dateText'}" wrapping="true" textAlign="Center" width="100%" emptyIndicatorMode="On"/>
+                  <Text text="{path:'result>ResultValue', formatter:'.formatter.quantityText'}" wrapping="true" textAlign="Center" width="100%" emptyIndicatorMode="On"/>
+                  <Text text="{path:'result>DefectsFound', formatter:'.formatter.quantityText'}" wrapping="true" textAlign="Center" width="100%" emptyIndicatorMode="On"/>
+                  <VBox width="100%" alignItems="Center" justifyContent="Center">
+                    <ObjectStatus text="{path:'result>ValuationCode', formatter:'.formatter.valuationText'}" state="{path:'result>ValuationCode', formatter:'.formatter.valuationState'}" visible="{= !!${result>ValuationCode} }" class="qpCenteredStatus"/>
+                    <Text text="-" visible="{= !${result>ValuationCode} }" wrapping="true" textAlign="Center" width="100%"/>
+                  </VBox>
+                  <Text text="{path:'result>MovedQuantity', formatter:'.formatter.quantityText'}" wrapping="true" textAlign="Center" width="100%" emptyIndicatorMode="On"/>
+                  <Text text="{result>Unit}" wrapping="true" textAlign="Center" width="100%" emptyIndicatorMode="On"/>
+                  <Text text="{result>MovementType}" wrapping="true" textAlign="Center" width="100%" emptyIndicatorMode="On"/>
+                  <Text text="{= ${result>DebitCreditIndicator} === 'S' ? 'Debit' : ${result>DebitCreditIndicator} === 'H' ? 'Credit' : ${result>DebitCreditIndicator} || '-' }" wrapping="true" textAlign="Center" width="100%"/>
+                  <Text text="{result>StorageLocation}" wrapping="true" textAlign="Center" width="100%" emptyIndicatorMode="On"/>
+                  <Text text="{path:'result>PostingDate', formatter:'.formatter.dateText'}" wrapping="true" textAlign="Center" width="100%" emptyIndicatorMode="On"/>
+                </cells>
+              </ColumnListItem>
+            </items>
+          </Table>
+        </ScrollContainer>
+      </VBox>
+    </content>
+  </Page>
+</mvc:View>

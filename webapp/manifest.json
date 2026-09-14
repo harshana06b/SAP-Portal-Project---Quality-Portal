@@ -1,0 +1,203 @@
+{
+  "_version": "1.60.0",
+  "sap.app": {
+    "id": "com.quality.portal.qualitylogin",
+    "type": "application",
+    "i18n": "i18n/i18n.properties",
+    "applicationVersion": {
+      "version": "1.0.0"
+    },
+    "title": "{{appTitle}}",
+    "description": "{{appDescription}}",
+    "resources": "resources.json",
+    "dataSources": {
+      "loginService": {
+        "uri": "/sap/opu/odata/sap/ZCDS_QM_LOGIN64_CDS/",
+        "type": "OData",
+        "settings": {
+          "odataVersion": "2.0",
+          "useBatch": false
+        }
+      },
+      "lotService": {
+        "uri": "/sap/opu/odata/sap/ZCDS_QM_LOTNEW64_CDS/",
+        "type": "OData",
+        "settings": {
+          "odataVersion": "2.0",
+          "useBatch": true
+        }
+      },
+      "resultService": {
+        "uri": "/sap/opu/odata/sap/ZCDS_QM_RESULTNEW64_CDS/",
+        "type": "OData",
+        "settings": {
+          "odataVersion": "2.0",
+          "useBatch": true
+        }
+      },
+      "decisionService": {
+        "uri": "/sap/opu/odata/sap/ZCDS_QM_DECISIONNEW64_CDS/",
+        "type": "OData",
+        "settings": {
+          "odataVersion": "2.0",
+          "useBatch": true
+        }
+      }
+    },
+    "crossNavigation": {
+      "inbounds": {
+        "quality-login": {
+          "semanticObject": "quality",
+          "action": "login",
+          "title": "{{quality-login.flpTitle}}",
+          "signature": {
+            "parameters": {},
+            "additionalParameters": "allowed"
+          }
+        }
+      }
+    }
+  },
+  "sap.ui": {
+    "technology": "UI5",
+    "deviceTypes": {
+      "desktop": true,
+      "tablet": true,
+      "phone": true
+    }
+  },
+  "sap.ui5": {
+    "flexEnabled": true,
+    "dependencies": {
+      "minUI5Version": "1.120.14",
+      "libs": {
+        "sap.m": {},
+        "sap.ui.core": {},
+        "sap.ui.layout": {},
+        "sap.f": {}
+      }
+    },
+    "contentDensities": {
+      "compact": true,
+      "cozy": true
+    },
+    "models": {
+      "i18n": {
+        "type": "sap.ui.model.resource.ResourceModel",
+        "settings": {
+          "bundleName": "com.quality.portal.qualitylogin.i18n.i18n"
+        }
+      },
+      "login": {
+        "dataSource": "loginService",
+        "preload": true,
+        "settings": {
+          "defaultBindingMode": "TwoWay",
+          "defaultCountMode": "Inline",
+          "refreshAfterChange": true
+        }
+      },
+      "lot": {
+        "dataSource": "lotService",
+        "preload": true,
+        "settings": {
+          "defaultBindingMode": "TwoWay",
+          "defaultCountMode": "Inline",
+          "refreshAfterChange": true
+        }
+      },
+      "result": {
+        "dataSource": "resultService",
+        "preload": true,
+        "settings": {
+          "defaultBindingMode": "OneWay",
+          "defaultCountMode": "Inline",
+          "refreshAfterChange": false
+        }
+      },
+      "decision": {
+        "dataSource": "decisionService",
+        "preload": true,
+        "settings": {
+          "defaultBindingMode": "OneWay",
+          "defaultCountMode": "Inline",
+          "refreshAfterChange": false
+        }
+      }
+    },
+    "resources": {
+      "css": [
+        {
+          "uri": "css/style.css"
+        }
+      ]
+    },
+    "routing": {
+      "config": {
+        "routerClass": "sap.m.routing.Router",
+        "controlAggregation": "pages",
+        "controlId": "app",
+        "transition": "fade",
+        "type": "View",
+        "viewType": "XML",
+        "path": "com.quality.portal.qualitylogin.view",
+        "async": true
+      },
+      "routes": [
+        {
+          "name": "login",
+          "pattern": ":?query:",
+          "target": "login"
+        },
+        {
+          "name": "dashboard",
+          "pattern": "dashboard",
+          "target": "dashboard"
+        },
+        {
+          "name": "inspectionLot",
+          "pattern": "inspection-lot",
+          "target": "inspectionLot"
+        },
+        {
+          "name": "resultRecording",
+          "pattern": "result-recording:?query:",
+          "target": "resultRecording"
+        },
+        {
+          "name": "usageDecision",
+          "pattern": "usage-decision:?query:",
+          "target": "usageDecision"
+        }
+      ],
+      "targets": {
+        "login": {
+          "id": "Login",
+          "name": "Login"
+        },
+        "dashboard": {
+          "id": "Dashboard",
+          "name": "Dashboard"
+        },
+        "inspectionLot": {
+          "id": "InspectionLot",
+          "name": "InspectionLot"
+        },
+        "resultRecording": {
+          "id": "ResultRecording",
+          "name": "ResultRecording"
+        },
+        "usageDecision": {
+          "id": "UsageDecision",
+          "name": "UsageDecision"
+        }
+      }
+    },
+    "rootView": {
+      "viewName": "com.quality.portal.qualitylogin.view.App",
+      "type": "XML",
+      "id": "App",
+      "async": true
+    }
+  }
+}

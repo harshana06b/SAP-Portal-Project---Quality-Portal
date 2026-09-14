@@ -1,0 +1,42 @@
+<mvc:View
+  controllerName="com.quality.portal.qualitylogin.controller.Dashboard"
+  displayBlock="true"
+  xmlns:mvc="sap.ui.core.mvc"
+  xmlns="sap.m">
+  <Page title="Dashboard" class="qpFadeIn qpDashboardPage">
+    <content>
+      <VBox class="qpDashboardContent">
+        <HBox class="qpDashboardHeader" alignItems="Center" justifyContent="SpaceBetween">
+          <VBox class="qpDashboardIdentity">
+            <Title text="Quality Portal" level="H2" class="qpDashboardTitle"/>
+            <Text text="Welcome, {session>/engineerName}" class="qpDashboardSubtitle"/>
+          </VBox>
+          <ObjectStatus title="Plant" text="{session>/plant}" state="Information" class="qpDashboardPlant"/>
+        </HBox>
+
+        <FlexBox
+          class="qpLaunchTileGrid qpDashboardOnlyTiles"
+          wrap="Wrap"
+          justifyContent="Center"
+          alignItems="Stretch"
+          renderType="Bare">
+          <GenericTile header="Inspection Lot" subheader="Review quality lots" press=".onInspectionLot" class="qpTile qpTileInspection">
+            <TileContent class="qpTileIconContent">
+              <ImageContent src="sap-icon://inspection"/>
+            </TileContent>
+          </GenericTile>
+          <GenericTile header="Result Records" subheader="Record inspected quantities" press=".onResultRecords" class="qpTile qpTileResults">
+            <TileContent class="qpTileIconContent">
+              <ImageContent src="sap-icon://activity-items"/>
+            </TileContent>
+          </GenericTile>
+          <GenericTile header="Usage Decision" subheader="Approve or reject lots" press=".onUsageDecision" class="qpTile qpTileDecision">
+            <TileContent class="qpTileIconContent">
+              <ImageContent src="sap-icon://decision"/>
+            </TileContent>
+          </GenericTile>
+        </FlexBox>
+      </VBox>
+    </content>
+  </Page>
+</mvc:View>

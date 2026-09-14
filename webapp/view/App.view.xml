@@ -1,0 +1,26 @@
+<mvc:View
+  controllerName="com.quality.portal.qualitylogin.controller.App"
+  displayBlock="true"
+  xmlns:mvc="sap.ui.core.mvc"
+  xmlns="sap.m">
+  <!-- FRS: App shell header is visible only after authenticated SAP login. -->
+  <Shell id="shell" appWidthLimited="false">
+    <Page id="shellPage" showHeader="{ui>/shellVisible}" enableScrolling="false">
+      <customHeader>
+        <Bar visible="{ui>/shellVisible}">
+          <contentLeft>
+            <Button icon="sap-icon://home" type="Transparent" press=".onNavHome" tooltip="Dashboard"/>
+            <Title text="Quality Portal"/>
+          </contentLeft>
+          <contentRight>
+            <Text text="{session>/engineerName}" class="sapUiSmallMarginEnd"/>
+            <Button icon="sap-icon://log" text="Logout" type="Transparent" press=".onLogout"/>
+          </contentRight>
+        </Bar>
+      </customHeader>
+      <content>
+        <App id="app" busy="{ui>/busy}"/>
+      </content>
+    </Page>
+  </Shell>
+</mvc:View>

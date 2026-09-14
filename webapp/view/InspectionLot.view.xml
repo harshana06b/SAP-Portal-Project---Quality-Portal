@@ -1,0 +1,56 @@
+<mvc:View
+  controllerName="com.quality.portal.qualitylogin.controller.InspectionLot"
+  displayBlock="true"
+  xmlns:mvc="sap.ui.core.mvc"
+  xmlns="sap.m"
+  xmlns:core="sap.ui.core">
+  <Page title="Inspection Lot" showNavButton="true" navButtonPress=".onBack" class="qpFadeIn">
+    <content>
+      <VBox class="sapUiResponsiveContentPadding">
+        <OverflowToolbar>
+          <SearchField id="lotSearch" width="20rem" search=".onSearch" liveChange=".onSearch" placeholder="Search inspection lots"/>
+          <ComboBox id="lotPlantFilter" width="10rem" change=".onPlantFilterChange" placeholder="Plant" items="{plantOptions>/plants}">
+            <core:Item key="{plantOptions>key}" text="{plantOptions>text}"/>
+          </ComboBox>
+          <ToolbarSpacer/>
+          <Button icon="sap-icon://sort" text="Sort" press=".onSort"/>
+          <Button icon="sap-icon://filter" text="Filter" press=".onFilter"/>
+          <Button icon="sap-icon://refresh" type="Transparent" press=".onRefresh"/>
+        </OverflowToolbar>
+        <!-- FRS: Responsive table binds directly to ZCDS_QM_LOTNEW64_CDS through model name lot. -->
+        <Table
+          id="lotTable"
+          mode="SingleSelectMaster"
+          growing="true"
+          growingScrollToLoad="true"
+          items="{lot>/ZCDS_QM_LOTNEW64}">
+          <columns>
+            <Column><Text text="Inspection Lot"/></Column>
+            <Column minScreenWidth="Tablet" demandPopin="true"><Text text="Material"/></Column>
+            <Column minScreenWidth="Tablet" demandPopin="true"><Text text="Plant"/></Column>
+            <Column hAlign="End"><Text text="Lot Quantity"/></Column>
+            <Column><Text text="Decision"/></Column>
+            <Column hAlign="Center" width="7rem"><Text text="Action"/></Column>
+          </columns>
+          <items>
+            <ColumnListItem>
+              <cells>
+                <ObjectIdentifier title="{lot>InspectionLot}"/>
+                <Text text="{lot>Material}"/>
+                <Text text="{lot>Plant}"/>
+                <ObjectNumber number="{lot>LotQuantity}"/>
+                <ObjectStatus
+                  text="{path:'lot>DecisionStatus', formatter:'.formatter.decisionText'}"
+                  state="{path:'lot>DecisionStatus', formatter:'.formatter.decisionState'}"/>
+                <HBox justifyContent="Center" alignItems="Center">
+                  <Button icon="sap-icon://activity-items" type="Transparent" tooltip="Result" press=".onOpenResults"/>
+                  <Button icon="sap-icon://decision" type="Transparent" tooltip="Decision" press=".onOpenDecision"/>
+                </HBox>
+              </cells>
+            </ColumnListItem>
+          </items>
+        </Table>
+      </VBox>
+    </content>
+  </Page>
+</mvc:View>

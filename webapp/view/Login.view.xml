@@ -1,0 +1,52 @@
+<mvc:View
+  controllerName="com.quality.portal.qualitylogin.controller.Login"
+  displayBlock="true"
+  xmlns:mvc="sap.ui.core.mvc"
+  xmlns="sap.m"
+  xmlns:core="sap.ui.core">
+  <Page showHeader="false" class="qpLoginPage qpFadeIn">
+    <content>
+      <VBox class="qpLoginWrap" alignItems="Center" justifyContent="Center">
+        <VBox class="qpLoginPanel sapUiResponsiveMargin" width="100%">
+          <!-- FRS: Login form collects SAP user credentials and does not use local authentication data. -->
+          <Title text="Quality Portal" level="H1" class="sapUiTinyMarginBottom"/>
+          <Text text="Sign in with your SAP quality engineer credentials." class="sapUiSmallMarginBottom"/>
+          <Label text="User ID" labelFor="userIdInput"/>
+          <Input
+            id="userIdInput"
+            value="{loginForm>/userId}"
+            valueLiveUpdate="true"
+            maxLength="12"
+            required="true"
+            submit=".onLogin"/>
+          <Label text="Password" labelFor="passwordInput" class="sapUiSmallMarginTop"/>
+          <Input
+            id="passwordInput"
+            value="{loginForm>/password}"
+            type="{loginForm>/passwordType}"
+            required="true"
+            submit=".onLogin">
+            <layoutData>
+              <FlexItemData growFactor="1"/>
+            </layoutData>
+          </Input>
+          <HBox justifyContent="End" class="sapUiTinyMarginTop">
+            <Button
+              icon="{loginForm>/passwordIcon}"
+              type="Transparent"
+              text="{loginForm>/passwordToggleText}"
+              press=".onTogglePassword"/>
+          </HBox>
+          <Button
+            text="Login"
+            type="Emphasized"
+            width="100%"
+            busy="{loginForm>/busy}"
+            enabled="{= !${loginForm>/busy} }"
+            press=".onLogin"
+            class="sapUiSmallMarginTop"/>
+        </VBox>
+      </VBox>
+    </content>
+  </Page>
+</mvc:View>
